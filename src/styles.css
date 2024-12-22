@@ -12,8 +12,130 @@ body {
 }
 
 header {
-  background-color: #f8d5d8;
-  color: #4b2c20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e8a5b4;
+  padding: 10px 20px;
+}
+
+header .logo h1 {
+  font-size: 24px;
+  color: #000;
+}
+
+header nav ul {
+  list-style-type: none;
+  display: flex;
+  gap: 20px;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+}
+
+header .cart-icon a {
+  text-decoration: none;
+  color: #000;
+  font-size: 24px;
+}
+
+/* Hero Section */
+.hero {
+  background-color: #d69a99;
   text-align: center;
-  padding: 20px 0;
+  padding: 50px 20px;
+}
+
+.hero h2 {
+  font-size: 36px;
+  color: #000;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+.hero .cta-btn {
+  background-color: #f29c9c;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.hero .cta-btn:hover {
+  background-color: #e06f6f;
+}
+
+/* Products Section */
+#products {
+  padding: 50px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+#products h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background-color: #f9f9f9;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.product-card h3 {
+  font-size: 24px;
+  margin-top: 10px;
+  color: #000;
+}
+
+.product-card p {
+  font-size: 18px;
+  color: #000;
+  margin-top: 5px;
+}
+
+.product-card .add-to-cart {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #f29c9c;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.product-card .add-to-cart:hover {
+  background-color: #e06f6f;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #e8a5b4;
+  color: #fff;
 }
