@@ -28,7 +28,6 @@ header .logo-img {
   width: 100px;
   height: auto;
   margin-right: 20px;
-  
 }
 
 header .logo h1 {
@@ -173,4 +172,35 @@ footer {
 
 .social-links a img:hover {
   transform: scale(1.1);
+}
+
+/* Cart Section */
+#cart {
+  padding: 20px;
+  background-color: #fdf1f5;
+  color: #333;
+}
+
+.cart-container {
+  margin-top: 15px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cart-item button {
+  padding: 5px 10px;
+  background-color: #e8a5b4;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cart-item button:hover {
+  background-color: #d48b99;
 }
