@@ -12,6 +12,7 @@ function addToCart(productName, productPrice) {
   }
   alert(`${productName} has been added to the cart!`);
   updateCartDisplay();
+  saveCart(); //Save cart data
 }
 
 // Function to Display Cart Contents
@@ -44,6 +45,7 @@ function updateCartDisplay() {
 function increaseQuantity(index) {
   cart[index].quantity += 1;
   updateCartDisplay();
+  saveCart();
 }
 
 // Function to Decrease Quantity
@@ -54,6 +56,7 @@ function decreaseQuantity(index) {
     removeFromCart(index);
   }
   updateCartDisplay();
+  saveCart();
 }
 
 // Function to Remove Item from Cart
@@ -61,6 +64,7 @@ function removeFromCart(index) {
   let removedItem = cart.splice(index, 1)[0];
   alert(`${removedItem.name} has been removed from the cart!`);
   updateCartDisplay();
+  saveCart();
 }
 
 // Checkout Button Functionality
@@ -79,3 +83,19 @@ document.getElementById("checkout-button").addEventListener("click", () => {
     updateCartDisplay(); // Update the display
   }
 });
+
+// Save Cart to Local Storage
+function saveCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+// Load Cart from Local Storage
+function loadCart() {
+  let savedCart = localStorage.getItem("cart");
+  if (savedCart) {
+    cart = JSON.parse(savedCart);
+    updateCartDisplay();
+  }
+}
+
+loadCart();
