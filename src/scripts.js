@@ -62,3 +62,20 @@ function removeFromCart(index) {
   alert(`${removedItem.name} has been removed from the cart!`);
   updateCartDisplay();
 }
+
+// Checkout Button Functionality
+document.getElementById("checkout-button").addEventListener("click", () => {
+  if (cart.length === 0) {
+    alert("Your cart is empty! Add items before checking out.");
+  } else {
+    let totalPrice = cart.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+    alert(
+      `Thank you for shopping with us! Your total is R${totalPrice.toFixed(2)}.`
+    );
+    cart = []; // Clear the cart
+    updateCartDisplay(); // Update the display
+  }
+});
