@@ -55,3 +55,10 @@ function decreaseQuantity(index) {
   }
   updateCartDisplay();
 }
+
+// Function to Remove Item from Cart
+function removeFromCart(index) {
+  let removedItem = cart.splice(index, 1)[0];
+  alert(`${removedItem.name} has been removed from the cart!`);
+  updateCartDisplay();
+}
