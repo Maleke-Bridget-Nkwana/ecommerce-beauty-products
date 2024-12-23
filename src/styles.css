@@ -56,7 +56,7 @@ header .cart-icon a {
 
 /* Hero Section */
 .hero {
-  background-color: #D57F8D;
+  background-color: #d57f8d;
   text-align: center;
   padding: 50px 20px;
 }
@@ -194,6 +194,29 @@ footer {
 
 .cart-item button {
   padding: 5px 10px;
+  background-color: #e8a5b4;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cart-item button:hover {
+  background-color: #d48b99;
+}
+
+/* Cart Total*/
+.cart-total {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Quantity Buttons*/
+.cart-item button {
+  margin: 0 5px;
+  padding: 5px;
   background-color: #e8a5b4;
   border: none;
   color: #fff;
