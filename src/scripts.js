@@ -304,4 +304,25 @@ function displayReviews(productName) {
   }
 }
 
+// Login/Signup Modal
+function openModal(id) {
+  document.getElementById(id).style.display = "flex";
+}
+
+function closeModal(id) {
+  document.getElementById(id).style.display = "none";
+}
+
+document.getElementById("login-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  alert("Login functionality to be implemented!");
+  closeModal("login-modal");
+});
+
+document.getElementById("signup-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  alert("Signup functionality to be implemented!");
+  closeModal("signup-modal");
+});
+
 loadCart();

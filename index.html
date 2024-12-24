@@ -24,6 +24,8 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
+      <button onclick="openModal('login-modal')">Login</button>
+      <button onclick="openModal('signup-modal')">Sign Up</button>
       <div class="cart-icon">
         <a href="#cart">🛒</a>
       </div>
@@ -284,6 +286,33 @@
         </select>
         <button onclick="submitReview()">Submit</button>
         <button onclick="closeReviewForm()">Close</button>
+      </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('login-modal')">&times;</span>
+        <h2>Login</h2>
+        <form id="login-form">
+          <input type="email" placeholder="Email" required />
+          <input type="password" placeholder="Password" required />
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signup-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('signup-modal')">&times;</span>
+        <h2>Sign Up</h2>
+        <form id="signup-form">
+          <input type="text" placeholder="Full Name" required />
+          <input type="email" placeholder="Email" required />
+          <input type="password" placeholder="Password" required />
+          <button type="submit">Sign Up</button>
+        </form>
       </div>
     </div>
 

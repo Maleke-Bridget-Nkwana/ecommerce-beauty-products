@@ -338,6 +338,12 @@ button:hover {
     font-size: 12px;
   }
 
+  .product-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
   .product-card h3 {
     font-size: 16px;
   }
@@ -359,17 +365,30 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
+    font-size: 14px;
   }
 
   /* Smaller margins for the product grid */
   .product-grid {
-    gap: 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .product-card {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 12px;
   }
 
   /* Adjust Footer */
   footer {
-    font-size: 12px;
+    font-size: 14px;
     padding: 5px;
+    text-align: center;
   }
 }
 
@@ -400,4 +419,33 @@ button:hover {
 .modal.show {
   opacity: 1;
   visibility: visible;
+}
+
+/* Login/Signup Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 20px;
 }
