@@ -318,6 +318,11 @@ button:hover {
 /* Media Queries */
 @media (max-width: 768px) {
   /* Smaller font sizes for mobile */
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
+
   h2 {
     font-size: 18px;
   }
@@ -328,6 +333,16 @@ button:hover {
 
   .product-card h3 {
     font-size: 16px;
+  }
+
+  .product-card img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
   }
 }
 
