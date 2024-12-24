@@ -227,4 +227,25 @@ function searchProducts() {
 // Event Listener for Search Bar
 document.getElementById("search-bar").addEventListener("input", searchProducts);
 
+// Sorting Functionality
+function sortProducts() {
+  let sortOption = document.getElementById("sort-options").value;
+  let sortedProducts = [...products]; // Create a copy of the products array
+
+  if (sortOption === "price-low-high") {
+    sortedProducts.sort((a, b) => a.price - b.price);
+  } else if (sortOption === "price-high-low") {
+    sortedProducts.sort((a, b) => b.price - a.price);
+  } else if (sortOption === "alphabetical") {
+    sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  displayProducts(sortedProducts);
+}
+
+// Event Listener for Sorting Dropdown
+document
+  .getElementById("sort-options")
+  .addEventListener("change", sortProducts);
+
 loadCart();
