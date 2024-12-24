@@ -117,11 +117,11 @@
             src="images/Beauty_Bliss_Watermelon_Lip_Oil.jpg"
             alt="Lip Oil 2"
           />
-          <h3>Watermelon Kiss Lip Oil</h3>
+          <h3>Watermelon Shine Lip Oil</h3>
           <p>R90.00</p>
           <button
             class="add-to-cart"
-            onclick="addToCart('Watermelon Kiss Lip Oil', 90)"
+            onclick="addToCart('Watermelon Shine Lip Oil', 90)"
           >
             Add to Cart
           </button>
@@ -167,6 +167,28 @@
       <p class="cart-total">Total: R0.00</p>
       <button id="checkout-button">Proceed to Checkout</button>
     </section>
+
+    <!-- Filter Section-->
+     <section id="filters">
+      <h3>Filter Products</h3>
+      <label for="product-type">Type:</label>
+      <select id="product-type">
+        <option value="all">All</option>
+        <option value="lip-oil">Lip Oils</option>
+        <option value="lip-gloss">Lip Glosses</option>
+        <option value="lip-liner">Lip Liners</option>
+        <option value="lip-kit">Lip Kits</option>
+      </select>
+
+      <label for="price-range">Price:</label>
+      <select id="price-range">
+        <option value="all">All</option>
+        <option value="low">Below R100</option>
+        <option value="medium">R100 - R200</option>
+        <option value="high">Above R200</option>
+      </select>
+
+     </section>
 
     <footer>
       <p>&copy; 2024 Beauty Bliss Bar. All rights reserved.</p>

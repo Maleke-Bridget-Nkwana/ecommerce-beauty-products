@@ -245,3 +245,22 @@ footer {
   background-color: #d48b99;
 }
 
+/*Filters*/
+
+#filters {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#filters label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+#filters select {
+  margin-right: 20px;
+  padding: 5px;
+}

@@ -98,4 +98,121 @@ function loadCart() {
   }
 }
 
+// Product Data Structure
+let products = [
+  {
+    name: "Cocoa Elegance Lip Kit",
+    price: 220,
+    type: "lip-kit",
+    image: "images/Beauty-Bliss-Brown-Kit.png",
+  },
+  {
+    name: "Rosy Radiance Lip Kit",
+    price: 220,
+    type: "lip-kit",
+    image: "images/Beauty_Bliss_Pink_Kit.jpg",
+  },
+  {
+    name: "Chestnut Lip Liner",
+    price: 50,
+    type: "lip-liner",
+    image: "images/Beauty-Bliss-Brown-Lip-Liner.webp",
+  },
+  {
+    name: "Scarlet Lip Liner",
+    price: 50,
+    type: "lip-liner",
+    image: "images/Beauty-Bliss-Pink-Lip-Liner.webp",
+  },
+  {
+    name: "Glass Shine Lip Oil",
+    price: 80,
+    type: "lip-oil",
+    image: "images/Beauty-Bliss-Clear-Lip-Oil.webp",
+  },
+  {
+    name: "Watermelon Shine Lip Oil",
+    price: 90,
+    type: "lip-oil",
+    image: "images/Beauty_Bliss_Watermelon_Lip_Oil.jpg",
+  },
+  {
+    name: "Cocoa Kiss Lip Gloss",
+    price: 90,
+    type: "lip-gloss",
+    image: "images/Beauty-Bliss-Brown-Lip-Gloss.webp",
+  },
+  {
+    name: "Strawberry Kiss Lip Gloss",
+    price: 90,
+    type: "lip-gloss",
+    image: "images/Beauty_Bliss_Pink_Lip_Gloss.jpg",
+  },
+];
+
+function displayProducts(productsToDisplay) {
+  let productContainer = document.querySelector(".product-grid");
+
+  if (!productContainer) {
+    console.error("Error: Element with class 'product-grid' not found.");
+    return;
+  }
+
+  productContainer.innerHTML = ""; // Clear existing products
+
+  productsToDisplay.forEach((product) => {
+    productContainer.innerHTML += `
+      <div class="product-card">
+        <img src="${product.image}" alt="${product.name}" />
+        <h3>${product.name}</h3>
+        <p>R${product.price.toFixed(2)}</p>
+        <button class="add-to-cart" onclick="addToCart('${product.name}', ${
+      product.price
+    })">Add to Cart</button>
+      </div>
+    `;
+  });
+}
+
+// Filtering
+function filterProducts() {
+  let typeFilter = document.getElementById("product-type").value;
+  let priceFilter = document.getElementById("price-range").value;
+
+  let filteredProducts = products;
+
+  // Filter by type
+  if (typeFilter !== "all") {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.type === typeFilter
+    );
+  }
+
+  // Filter by price
+  if (priceFilter === "low") {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.price < 100
+    );
+  } else if (priceFilter === "medium") {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.price >= 100 && product.price <= 200
+    );
+  } else if (priceFilter === "high") {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.price > 200
+    );
+  }
+
+  console.log("Filtered Products:", filteredProducts); // Debugging
+
+  displayProducts(filteredProducts); // Display the filtered products
+}
+
+document
+  .getElementById("product-type")
+  .addEventListener("change", filterProducts);
+document
+  .getElementById("price-range")
+  .addEventListener("change", filterProducts);
+
 loadCart();
