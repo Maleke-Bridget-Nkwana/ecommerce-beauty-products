@@ -264,3 +264,17 @@ footer {
   margin-right: 20px;
   padding: 5px;
 }
+
+/* Search Bar*/
+.search-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#search-bar {
+  width: 80%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

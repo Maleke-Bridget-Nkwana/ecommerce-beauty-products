@@ -215,4 +215,16 @@ document
   .getElementById("price-range")
   .addEventListener("change", filterProducts);
 
+// Search Functionality
+function searchProducts() {
+  let searchTerm = document.getElementById("search-bar").value.toLowerCase();
+  let filteredProducts = products.filter((products) =>
+    products.name.toLowerCase().includes(searchTerm)
+  );
+  displayProducts(filteredProducts);
+}
+
+// Event Listener for Search Bar
+document.getElementById("search-bar").addEventListener("input", searchProducts);
+
 loadCart();
