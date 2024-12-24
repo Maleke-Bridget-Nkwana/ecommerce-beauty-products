@@ -16,7 +16,8 @@ header {
   justify-content: space-between;
   align-items: center;
   background-color: #e54861;
-  padding: 10px 20px;
+  padding: 10px;
+  text-align: center;
 }
 
 header .logo {
@@ -100,21 +101,25 @@ header .cart-icon a {
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
+  margin: 20px 0;
 }
 
 .product-card {
   background-color: #f9f9f9;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
 }
 
 .product-card img {
   max-width: 100%;
   border-radius: 10px;
+  height: auto;
+  margin-bottom: 10px;
 }
 
 .product-card h3 {
@@ -147,7 +152,7 @@ header .cart-icon a {
 /* Footer */
 footer {
   text-align: center;
-  padding: 20px;
+  padding: 10px;
   background-color: #e8a5b4;
   color: #fff;
 }
@@ -246,7 +251,6 @@ footer {
 }
 
 /*Filters*/
-
 #filters {
   margin-bottom: 20px;
   padding: 10px;
@@ -269,10 +273,11 @@ footer {
 .search-container {
   margin-bottom: 20px;
   text-align: center;
+  margin: 10px auto;
 }
 
 #search-bar {
-  width: 80%;
+  width: 90%;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -282,11 +287,55 @@ footer {
 .sorting-container {
   margin-bottom: 20px;
   text-align: center;
+  margin: 10px auto;
 }
 
 #sort-options {
   padding: 10px;
-font-size: 16px;
-border: 1px solid #ccc;
-border-radius: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 90%;
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  /* Smaller font sizes for mobile */
+  h2 {
+    font-size: 18px;
+  }
+
+  button {
+    font-size: 12px;
+  }
+
+  .product-card h3 {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Stack Header and Logo */
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Smaller margins for the product grid */
+  .product-grid {
+    gap: 10px;
+  }
+
+  /* Adjust Footer */
+  footer {
+    font-size: 12px;
+    padding: 5px;
+  }
 }
