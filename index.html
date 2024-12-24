@@ -64,6 +64,13 @@
           <img src="images/Beauty-Bliss-Brown-Kit.png" alt="Lip Kit 1" />
           <h3>Cocoa Elegance Lip Kit</h3>
           <p>R220.00</p>
+          <div class="reviews">
+            <p>Rating: <span class="rating">4.5</span>/5</p>
+            <button onclick="showReviewForm('Cocoa Elegance Lip Kit')">
+              Add Review
+            </button>
+            <div class="review-list"></div>
+          </div>
           <button
             class="add-to-cart"
             onclick="addToCart('Cocoa Elegance Lip Kit', 220)"
@@ -77,6 +84,13 @@
           <img src="images/Beauty_Bliss_Pink_Kit.jpg" alt="Lip Kit 2" />
           <h3>Rosy Radiance Lip Kit</h3>
           <p>R220.00</p>
+          <div class="reviews">
+            <p>Rating: <span class="rating">4.5</span>/5</p>
+            <button onclick="showReviewForm('Rosy Radiance Lip Kit')">
+              Add Review
+            </button>
+            <div class="review-list"></div>
+          </div>
           <button
             class="add-to-cart"
             onclick="addToCart('Rosy Radiance Lip Kit', 220)"
@@ -93,6 +107,13 @@
           />
           <h3>Chestnut Lip Liner</h3>
           <p>R50.00</p>
+          <div class="reviews">
+            <p>Rating: <span class="rating">4.5</span>/5</p>
+            <button onclick="showReviewForm('Chestnut Lip Liner')">
+              Add Review
+            </button>
+            <div class="review-list"></div>
+          </div>
           <button
             class="add-to-cart"
             onclick="addToCart('Chestnut Lip Liner', 50)"
@@ -109,6 +130,13 @@
           />
           <h3>Scarlet Lip Liner</h3>
           <p>R50.00</p>
+          <div class="reviews">
+            <p>Rating: <span class="rating">4.5</span>/5</p>
+            <button onclick="showReviewForm('Scarlet Lip Liner')">
+              Add Review
+            </button>
+            <div class="review-list"></div>
+          </div>
           <button
             class="add-to-cart"
             onclick="addToCart('Scarlet Lip Liner', 50)"
@@ -122,6 +150,13 @@
           <img src="images/Beauty-Bliss-Clear-Lip-Oil.webp" alt="Lip Oil 1" />
           <h3>Glass Shine Lip Oil</h3>
           <p>R80.00</p>
+          <div class="reviews">
+            <p>Rating: <span class="rating">4.5</span>/5</p>
+            <button onclick="showReviewForm('Glass Shine Lip Oil')">
+              Add Review
+            </button>
+            <div class="review-list"></div>
+          </div>
           <button
             class="add-to-cart"
             onclick="addToCart('Glass Shine Lip Oil', 80)"
@@ -138,6 +173,13 @@
           />
           <h3>Watermelon Shine Lip Oil</h3>
           <p>R90.00</p>
+          <div class="reviews">
+            <p>Rating: <span class="rating">4.5</span>/5</p>
+            <button onclick="showReviewForm('Watermelon Shine Lip Oil')">
+              Add Review
+            </button>
+            <div class="review-list"></div>
+          </div>
           <button
             class="add-to-cart"
             onclick="addToCart('Watermelon Shine Lip Oil', 90)"
@@ -154,6 +196,13 @@
           />
           <h3>Cocoa Kiss Lip Gloss</h3>
           <p>R90.00</p>
+          <div class="reviews">
+            <p>Rating: <span class="rating">4.5</span>/5</p>
+            <button onclick="showReviewForm('Cocoa Kiss Lip Gloss')">
+              Add Review
+            </button>
+            <div class="review-list"></div>
+          </div>
           <button
             class="add-to-cart"
             onclick="addToCart('Cocoa Kiss Lip Gloss', 90)"
@@ -167,6 +216,13 @@
           <img src="images/Beauty_Bliss_Pink_Lip_Gloss.jpg" alt="Lip Gloss 2" />
           <h3>Strawberry Kiss Lip Gloss</h3>
           <p>R90.00</p>
+          <div class="reviews">
+            <p>Rating: <span class="rating">4.5</span>/5</p>
+            <button onclick="showReviewForm('Strawberry Kiss Lip Gloss')">
+              Add Review
+            </button>
+            <div class="review-list"></div>
+          </div>
           <button
             class="add-to-cart"
             onclick="addToCart('Strawberry Kiss Lip Gloss', 90)"
@@ -207,6 +263,29 @@
         <option value="high">Above R200</option>
       </select>
     </section>
+
+    <!--Review Form-->
+    <div id="review-modal" class="hidden">
+      <div class="modal-content">
+        <h3>Add a Review</h3>
+        <input type="text" id="review-name" placeholder="Your Name" required />
+        <textarea
+          id="review-text"
+          placeholder="Your Review"
+          required
+        ></textarea>
+        <label for="review-rating">Rating:</label>
+        <select id="review-rating">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <button onclick="submitReview()">Submit</button>
+        <button onclick="closeReviewForm()">Close</button>
+      </div>
+    </div>
 
     <footer>
       <p>&copy; 2024 Beauty Bliss Bar. All rights reserved.</p>

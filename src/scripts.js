@@ -258,4 +258,50 @@ document
   .getElementById("sort-options")
   .addEventListener("change", sortProducts);
 
+// Reviews Functionality
+let reviews = {}; // Object to store reviews for each product
+
+function showReviewForm(productName) {
+  document.getElementById("review-modal").classList.remove("hidden");
+  document.getElementById("review-modal").dataset.product = productName;
+}
+
+function closeReviewForm() {
+  document.getElementById("review-modal").classList.add("hidden");
+}
+
+function submitReview() {
+  let productName = document.getElementById("review-modal").dataset.product;
+  let name = document.getElementById("review-name").value;
+  let text = document.getElementById("review-text").value;
+  let rating = parseInt(document.getElementById("review-rating").value);
+
+  if (!reviews[productName]) {
+    reviews[productName] = [];
+  }
+
+  reviews[productName].push({ name, text, rating });
+
+  document.getElementById("review-modal").classList.add("hidden");
+  displayReviews(productName);
+}
+
+function displayReviews(productName) {
+  let reviewList = document.querySelector(
+    `.product-card:has(h3:contains("${productName}")) .review-list`
+  );
+
+  if (reviewList) {
+    reviewList.innerHTML = "";
+    reviews[productName].forEach((review) => {
+      reviewList.innerHTML += `
+        <div class="review-item">
+          <p><strong>${review.name}:</strong> ${review.text}</p>
+          <p>Rating: ${review.rating}/5</p>
+        </div>
+      `;
+    });
+  }
+}
+
 loadCart();
