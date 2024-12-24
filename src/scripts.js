@@ -76,11 +76,21 @@ document.getElementById("checkout-button").addEventListener("click", () => {
       (total, item) => total + item.price * item.quantity,
       0
     );
+    // Save order details to localStorage
+    localStorage.setItem("orderSummary", JSON.stringify(cart));
+
+    // Redirect to confirmation page
+    window.location.href = "confirmation.html";
     alert(
       `Thank you for shopping with us! Your total is R${totalPrice.toFixed(2)}.`
     );
-    cart = []; // Clear the cart
-    updateCartDisplay(); // Update the display
+
+    // Clear the cart
+    cart = [];
+    saveCart();
+
+    // Update the display
+    updateCartDisplay();
   }
 });
 
