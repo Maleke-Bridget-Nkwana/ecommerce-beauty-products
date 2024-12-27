@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wishlist</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Your Wishlist</h1>
+    </header>
+    <main>
+      <div class="wishlist-container">
+        <div class="wishlist-items"></div>
+      </div>
+
+      <footer>
+        <p>&copy; 2024 Beauty Bliss Bar</p>
+      </footer>
+    </main>
+
+    <script>
+      // Function to Load Wishlist from Local Storage
+      function loadWishlist() {
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || []; // Get wishlist or empty array
+        let wishlistContainer = document.querySelector(".wishlist-items");
+
+        wishlistContainer.innerHTML = ""; // Clear existing items
+
+        if (wishlist.length === 0) {
+          wishlistContainer.innerHTML = "<p>Your wishlist is empty.</p>";
+        } else {
+          wishlist.forEach((item, index) => {
+            wishlistContainer.innerHTML += `
+          <div class="wishlist-item">
+            <p>${item}</p>
+            <button onclick="removeFromWishlist(${index})">Remove</button>
+          </div>`;
+          });
+        }
+      }
+
+      // Function to Remove Item from Wishlist
+      function removeFromWishlist(index) {
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        let removedItem = wishlist.splice(index, 1); // Remove item at the given index
+        alert(`${removedItem} has been removed from your wishlist!`);
+        localStorage.setItem("wishlist", JSON.stringify(wishlist)); // Save updated wishlist
+        loadWishlist(); // Refresh display
+      }
+
+      // Load Wishlist on Page Load
+      loadWishlist();
+    </script>
+  </body>
+</html>

@@ -338,7 +338,7 @@ button:hover {
     font-size: 12px;
   }
 
-  .product-grid{
+  .product-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
@@ -448,4 +448,36 @@ button:hover {
   right: 15px;
   cursor: pointer;
   font-size: 20px;
+}
+
+/* Wishlist Container */
+.wishlist-container {
+  
+  margin: 0 auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+.wishlist-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.wishlist-items p {
+  font-size: 18px;
+  margin: 10px 0;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  background-color: #fff4f7;
+  text-align: left;
+}
+
+/* Empty Wishlist Message */
+.wishlist-container p {
+  font-size: 16px;
+  color: #666;
 }

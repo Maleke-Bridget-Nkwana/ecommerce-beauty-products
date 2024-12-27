@@ -176,6 +176,9 @@ function displayProducts(productsToDisplay) {
         <img src="${product.image}" alt="${product.name}" />
         <h3>${product.name}</h3>
         <p>R${product.price.toFixed(2)}</p>
+        <button onclick="addToWishlist('${
+          product.name
+        }')">Add to Wishlist</button>
         <button class="add-to-cart" onclick="addToCart('${product.name}', ${
       product.price
     })">Add to Cart</button>
@@ -324,5 +327,19 @@ document.getElementById("signup-form").addEventListener("submit", (e) => {
   alert("Signup functionality to be implemented!");
   closeModal("signup-modal");
 });
+
+// Wishlist Array (loaded from localStorage or initialized empty)
+let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+// Function to Add to Wishlist
+window.addToWishlist = function (productName) { // Make function globally accessible
+  if (!wishlist.includes(productName)) {
+    wishlist.push(productName);
+    localStorage.setItem("wishlist", JSON.stringify(wishlist)); // Save to localStorage
+    alert(`${productName} has been added to your wishlist!`);
+  } else {
+    alert(`${productName} is already in your wishlist!`);
+  }
+};
 
 loadCart();
