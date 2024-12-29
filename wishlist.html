@@ -21,37 +21,144 @@
     </main>
 
     <script>
-      // Function to Load Wishlist from Local Storage
-      function loadWishlist() {
-        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || []; // Get wishlist or empty array
+      // Product Data Structure
+      let products = [
+        {
+          name: "Cocoa Elegance Lip Kit",
+          price: 220,
+          type: "lip-kit",
+          image: "images/Beauty-Bliss-Brown-Kit.png",
+        },
+        {
+          name: "Rosy Radiance Lip Kit",
+          price: 220,
+          type: "lip-kit",
+          image: "images/Beauty_Bliss_Pink_Kit.jpg",
+        },
+        {
+          name: "Chestnut Lip Liner",
+          price: 50,
+          type: "lip-liner",
+          image: "images/Beauty-Bliss-Brown-Lip-Liner.webp",
+        },
+        {
+          name: "Scarlet Lip Liner",
+          price: 50,
+          type: "lip-liner",
+          image: "images/Beauty-Bliss-Pink-Lip-Liner.webp",
+        },
+        {
+          name: "Glass Shine Lip Oil",
+          price: 80,
+          type: "lip-oil",
+          image: "images/Beauty-Bliss-Clear-Lip-Oil.webp",
+        },
+        {
+          name: "Watermelon Shine Lip Oil",
+          price: 90,
+          type: "lip-oil",
+          image: "images/Beauty_Bliss_Watermelon_Lip_Oil.jpg",
+        },
+        {
+          name: "Cocoa Kiss Lip Gloss",
+          price: 90,
+          type: "lip-gloss",
+          image: "images/Beauty-Bliss-Brown-Lip-Gloss.webp",
+        },
+        {
+          name: "Strawberry Kiss Lip Gloss",
+          price: 90,
+          type: "lip-gloss",
+          image: "images/Beauty_Bliss_Pink_Lip_Gloss.jpg",
+        },
+      ];
+
+      document.addEventListener("DOMContentLoaded", function () {
+        displayWishlist();
+      });
+
+      // Display Wishlist
+      function displayWishlist() {
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
         let wishlistContainer = document.querySelector(".wishlist-items");
 
-        wishlistContainer.innerHTML = ""; // Clear existing items
+        if (!wishlistContainer) {
+          console.error("Wishlist container not found in the DOM.");
+          return;
+        }
+
+        wishlistContainer.innerHTML = ""; // Clear the container
 
         if (wishlist.length === 0) {
           wishlistContainer.innerHTML = "<p>Your wishlist is empty.</p>";
         } else {
           wishlist.forEach((item, index) => {
             wishlistContainer.innerHTML += `
-          <div class="wishlist-item">
-            <p>${item}</p>
-            <button onclick="removeFromWishlist(${index})">Remove</button>
-          </div>`;
+        <div class="wishlist-item">
+          <p>${item.name} - R${item.price.toFixed(2)}</p>
+          <button onclick="moveToCart(${index})">Move to Cart</button>
+               <button onclick="removeFromWishlist(${index})">Remove</button>
+        </div>
+      `;
           });
         }
       }
 
-      // Function to Remove Item from Wishlist
-      function removeFromWishlist(index) {
+      // Move to Cart
+      function moveToCart(index) {
+        // Retrieve cart and wishlist from localStorage
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
         let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-        let removedItem = wishlist.splice(index, 1); // Remove item at the given index
-        alert(`${removedItem} has been removed from your wishlist!`);
-        localStorage.setItem("wishlist", JSON.stringify(wishlist)); // Save updated wishlist
-        loadWishlist(); // Refresh display
+
+        // Check if the item exists in the wishlist
+        if (wishlist[index]) {
+          const wishlistItem = wishlist[index];
+
+          // Check if the item already exists in the cart
+          let existingCartItem = cart.find(
+            (item) => item.name === wishlistItem.name
+          );
+
+          if (existingCartItem) {
+            // If it exists, increase the quantity
+            existingCartItem.quantity += 1;
+          } else {
+            // If not, add it as a new item
+            cart.push({
+              name: wishlistItem.name,
+              price: wishlistItem.price,
+              quantity: 1,
+            });
+          }
+
+          // Remove the item from the wishlist
+          wishlist.splice(index, 1);
+
+          // Save updated cart and wishlist to localStorage
+          localStorage.setItem("cart", JSON.stringify(cart));
+          localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+          alert(`${wishlistItem.name} has been moved to your cart!`);
+
+          // Refresh the wishlist display
+          displayWishlist();
+        } else {
+          alert("Error: Item not found in the wishlist.");
+        }
+
+        // Optional: Update the cart display if the cart is shown on the same page
+        if (typeof updateCartDisplay === "function") {
+          updateCartDisplay();
+        }
       }
 
-      // Load Wishlist on Page Load
-      loadWishlist();
+      // Remove from Wishlist
+      function removeFromWishlist(index) {
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        wishlist.splice(index, 1);
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        displayWishlist();
+      }
     </script>
   </body>
 </html>

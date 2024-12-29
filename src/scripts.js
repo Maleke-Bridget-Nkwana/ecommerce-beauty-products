@@ -3,72 +3,134 @@ let cart = [];
 
 // Function to Add to Cart
 function addToCart(productName, productPrice) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
   let existingProduct = cart.find((item) => item.name === productName);
+
   if (existingProduct) {
-    existingProduct.quantity += 1; // Increase quantity if product already exists
+    existingProduct.quantity += 1;
   } else {
-    let product = { name: productName, price: productPrice, quantity: 1 };
-    cart.push(product);
+    cart.push({ name: productName, price: productPrice, quantity: 1 });
   }
-  alert(`${productName} has been added to the cart!`);
-  updateCartDisplay();
-  saveCart(); //Save cart data
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert(`${productName} has been added to your cart!`);
 }
+
+// Expose the function globally
+window.addToCart = addToCart;
+
+// Function to Update Quantity
+function updateCartItemQuantity(index, action) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  if (cart[index]) {
+    if (action === "increase") {
+      cart[index].quantity += 1; // Increase quantity
+    } else if (action === "decrease") {
+      if (cart[index].quantity > 1) {
+        cart[index].quantity -= 1; // Decrease quantity
+      } else {
+        cart.splice(index, 1); // Remove item if quantity reaches 0
+      }
+    }
+
+    // Save updated cart and refresh display
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartDisplay();
+  } else {
+    console.error("Item not found in cart at index:", index);
+    alert("Error: Item not found in the cart.");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  updateCartDisplay();
+});
 
 // Function to Display Cart Contents
 function updateCartDisplay() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
   let cartContainer = document.querySelector(".cart-container");
   let cartTotal = document.querySelector(".cart-total");
-  cartContainer.innerHTML = ""; // Clear previous content
+
+  if (!cartContainer || !cartTotal) {
+    console.error("Cart container or total not found in the DOM.");
+    return;
+  }
+
+  cartContainer.innerHTML = ""; // Clear the container
 
   if (cart.length === 0) {
     cartContainer.innerHTML = "<p>Your cart is empty.</p>";
     cartTotal.textContent = "Total: R0.00";
   } else {
     let totalPrice = 0;
+
     cart.forEach((item, index) => {
       totalPrice += item.price * item.quantity;
+
       cartContainer.innerHTML += `
-                <div class="cart-item">
-                    <span>${item.name} - R${item.price} x ${item.quantity}</span>
-                    <button onclick="increaseQuantity(${index})">+</button>
-                    <button onclick="decreaseQuantity(${index})">-</button>
-                    <button onclick="removeFromCart(${index})">Remove</button>
-                </div>
-            `;
+        <div class="cart-item">
+          <p>${item.name} - R${item.price.toFixed(2)} x ${item.quantity}</p>
+          <button onclick="updateCartItemQuantity(${index}, 'increase')">+</button>
+          <button onclick="updateCartItemQuantity(${index}, 'decrease')">-</button>
+          <button onclick="removeFromCart(${index})">Remove</button>
+        </div>
+      `;
     });
+
     cartTotal.textContent = `Total: R${totalPrice.toFixed(2)}`;
   }
 }
 
 // Function to Increase Quantity
 function increaseQuantity(index) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
   cart[index].quantity += 1;
-  updateCartDisplay();
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartDisplay(); // Refresh the cart display
   saveCart();
 }
 
 // Function to Decrease Quantity
 function decreaseQuantity(index) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
   if (cart[index].quantity > 1) {
     cart[index].quantity -= 1;
   } else {
-    removeFromCart(index);
+    // Optionally confirm before removing
+    if (confirm("Do you want to remove this item?")) {
+      cart.splice(index, 1); // Remove the item if quantity is 1
+    }
   }
-  updateCartDisplay();
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartDisplay(); // Refresh the cart display
   saveCart();
 }
 
 // Function to Remove Item from Cart
 function removeFromCart(index) {
-  let removedItem = cart.splice(index, 1)[0];
-  alert(`${removedItem.name} has been removed from the cart!`);
-  updateCartDisplay();
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  if (cart[index]) {
+    cart.splice(index, 1); // Remove the item at the specified index
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("Item removed from your cart.");
+    updateCartDisplay(); // Refresh the cart display
+  } else {
+    alert("Error: Item not found in the cart.");
+  }
+
   saveCart();
 }
 
 // Checkout Button Functionality
 document.getElementById("checkout-button").addEventListener("click", () => {
+  // Fetch the cart from localStorage
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
   if (cart.length === 0) {
     alert("Your cart is empty! Add items before checking out.");
   } else {
@@ -76,22 +138,24 @@ document.getElementById("checkout-button").addEventListener("click", () => {
       (total, item) => total + item.price * item.quantity,
       0
     );
+
     // Save order details to localStorage
     localStorage.setItem("orderSummary", JSON.stringify(cart));
 
-    // Redirect to confirmation page
-    window.location.href = "confirmation.html";
+    // Display a thank-you message
     alert(
       `Thank you for shopping with us! Your total is R${totalPrice.toFixed(2)}.`
     );
 
-    // Clear the cart
-    cart = [];
-    saveCart();
+    // Redirect to confirmation page
+    window.location.href = "confirmation.html";
 
-    // Update the display
-    updateCartDisplay();
+    // Clear the cart in localStorage after redirect
+    localStorage.removeItem("cart");
   }
+  // Clear the cart
+  cart = [];
+  saveCart();
 });
 
 // Save Cart to Local Storage
@@ -332,14 +396,19 @@ document.getElementById("signup-form").addEventListener("submit", (e) => {
 let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
 // Function to Add to Wishlist
-window.addToWishlist = function (productName) { // Make function globally accessible
-  if (!wishlist.includes(productName)) {
-    wishlist.push(productName);
-    localStorage.setItem("wishlist", JSON.stringify(wishlist)); // Save to localStorage
+function addToWishlist(productName, productPrice) {
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+  if (!wishlist.some((item) => item.name === productName)) {
+    wishlist.push({ name: productName, price: productPrice });
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
     alert(`${productName} has been added to your wishlist!`);
   } else {
     alert(`${productName} is already in your wishlist!`);
   }
-};
+}
+
+// Expose the function globally
+window.addToWishlist = addToWishlist;
 
 loadCart();
